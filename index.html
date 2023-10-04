@@ -1,7 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded GraphQL Editor</title>
+    <!-- React and ReactDOM are needed to render your React component -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Include the graphql-editor library -->
+    <script src="path_to_graphql_editor_library.js"></script>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div id="root"></div>
+    <script>
+        // Assuming that GraphQL Editor provides UMD/CommonJS exports, we can use it directly
+        const EmbeddedGraphQLEditor = window.GraphQLEditor.EmbeddedGraphQLEditor;
+        
+        // Your schema
+        const googleDirectionsNew = `type Query { ... }`;  // Your actual GraphQL schema string
+
+        // Your React component
+        class EmbeddedEditor extends React.Component {
+            render() {
+                return (
+                    <div
+                        style={{
+                            flex: 1,
+                            width: '100%',
+                            height: '100%',
+                            alignSelf: 'stretch',
+                            display: 'flex',
+                            position: 'relative',
+                        }}
+                    >
+                        <EmbeddedGraphQLEditor
+                            schema={{
+                                code: googleDirectionsNew,
+                                libraries: '',
+                            }}
+                        />
+                    </div>
+                );
+            }
+        }
+
+        // Render the component
+        ReactDOM.render(<EmbeddedEditor />, document.getElementById('root'));
+    </script>
 </body>
+
 </html>
